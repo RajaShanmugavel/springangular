@@ -4,6 +4,7 @@
 <head>
 <link rel="stylesheet"	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 
 <script>
 	var app = angular.module('MyApp',[]);
@@ -36,6 +37,7 @@
 			$scope.studentsForm.id = student.id;
 			$scope.studentsForm.name = student.name;
 			$scope.studentsForm.city = student.city;
+			
 		}
 		
 		$scope.deleteStudent = function(student){
@@ -47,7 +49,26 @@
 				headers : {
 					'Content-Type' : 'application/json'
 				}
-			}).then(getStudentDetails());
+			}).then(getStudentDetails(), clearForm());
+		}
+		
+		$scope.updateStudent = function(){
+			console.log("##updateStudent()##");
+			$http({
+				method : 'POST',
+				url : REST_URL+'student/updateStudent',
+				data : angular.toJson($scope.studentsForm),
+				headers : {
+					'Content-Type' : 'application/json'
+				}
+			}).then(getStudentDetails(), clearForm());
+				
+		}
+		
+		function clearForm(){
+			$scope.studentsForm.id = "";
+			$scope.studentsForm.name = "";
+			$scope.studentsForm.city = "";
 		}
 		
 		
@@ -63,21 +84,24 @@
 		<table class="table table-bordered" style="width: 600px">
 			<tr>
 				<td>ID:</td>
-				<td><input type="text" name="id" ng-model="studentsForm.id" size="30"/></td>
-				<td></td>
-				<td></td>
+				<td><input type="text" id="studid" name="id" ng-model="studentsForm.id" size="30"/></td>
+				<td colspan="2"></td>
 			</tr>
 			<tr>
 				<td>Name:</td>
 				<td><input type="text" name="name" ng-model="studentsForm.name" size="30" /></td>
-				<td></td>
-				<td></td>
+				<td colspan="2"></td>
 			</tr>
 			<tr>
 				<td>City:</td>
 				<td><input type="text" name="city" ng-model="studentsForm.city" /></td>
-				<td></td>
-				<td></td>
+				<td colspan="2"></td>
+			</tr>
+			
+			<tr>
+				<td colspan="4">
+				<button id="updins" class="btn btn-primary btn-sm" ng-click="updateStudent()">Update</button>
+				</td>
 			</tr>
 			
 			<tr ng-repeat="student in students">
@@ -85,7 +109,7 @@
 			<td>{{ student.name}}</td>
 			<td>{{ student.city}}</td>
 			<td>
-			<a ng-click="editStudent(student)" class="btn btn-primary btn-sm">Edit</a>
+			<a id="editstud" ng-click="editStudent(student)" class="btn btn-primary btn-sm">Edit</a>
 			<a ng-click="deleteStudent(student)" class="btn btn-danger btn-sm">Delete</a>
 			</td>
 			</tr>

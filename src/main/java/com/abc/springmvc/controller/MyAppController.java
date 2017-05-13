@@ -23,7 +23,7 @@ import com.abc.springmvc.model.Student;
 @RestController
 public class MyAppController {
 	
-	List<Student> list = new ArrayList<Student>();
+	public List<Student> list = new ArrayList<Student>();
 
 	
 	@RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
@@ -68,9 +68,9 @@ public class MyAppController {
 		list.add(student);
 		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 	}
-	//Test
-	@RequestMapping(value ="/student/updateStudent", method=RequestMethod.PUT)
-	public ResponseEntity<Void> updateStudent(@RequestBody Student student){
+	
+	@RequestMapping(value ="/student/updateStudent", consumes=MediaType.APPLICATION_JSON_VALUE, method=RequestMethod.POST)
+	public List<Student> updateStudent(@RequestBody Student student){
 		for(Student s:list){
 			System.out.println("student:"+student);
 			if(s.getId().equals(student.getId())){
@@ -78,7 +78,7 @@ public class MyAppController {
 				s.setName(student.getName());
 			}
 		}
-		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		return list;
 	}
 	
 	@PostConstruct
