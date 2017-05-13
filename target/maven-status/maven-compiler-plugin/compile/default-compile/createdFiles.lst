@@ -1,0 +1,7 @@
+com\abc\springmvc\configuration\SecurityWebApplicationInitializer.class
+com\abc\springmvc\controller\DefaultController.class
+com\abc\springmvc\configuration\MyAppInitializer.class
+com\abc\springmvc\configuration\SecurityConfiguration.class
+com\abc\springmvc\model\Student.class
+com\abc\springmvc\controller\MyAppController.class
+com\abc\springmvc\configuration\MyAppConfiguration.class
