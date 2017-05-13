@@ -68,7 +68,7 @@ public class MyAppController {
 		list.add(student);
 		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 	}
-	
+	//Test
 	@RequestMapping(value ="/student/updateStudent", method=RequestMethod.PUT)
 	public ResponseEntity<Void> updateStudent(@RequestBody Student student){
 		for(Student s:list){
