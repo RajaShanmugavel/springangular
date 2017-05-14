@@ -65,6 +65,18 @@
 				
 		}
 		
+		$scope.addStudent = function(){
+			console.log("##addStudent()##");
+			$http({
+				method : 'POST',
+				url : REST_URL+'student/addStudent',
+				data : angular.toJson($scope.studentsForm),
+				headers : {
+					'Content-Type' : 'application/json'
+				}
+			}).then(getStudentDetails(), clearForm());
+		}
+		
 		function clearForm(){
 			$scope.studentsForm.id = "";
 			$scope.studentsForm.name = "";
@@ -101,6 +113,7 @@
 			<tr>
 				<td colspan="4">
 				<button id="updins" class="btn btn-primary btn-sm" ng-click="updateStudent()">Update</button>
+				<button id="updins" class="btn btn-primary btn-sm" ng-click="addStudent()">Add</button>
 				</td>
 			</tr>
 			

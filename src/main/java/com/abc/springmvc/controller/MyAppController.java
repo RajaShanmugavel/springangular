@@ -51,7 +51,7 @@ public class MyAppController {
 	
 	@RequestMapping(value="/student/deleteStudent", consumes = MediaType.APPLICATION_JSON_VALUE, method=RequestMethod.DELETE)
 	public ResponseEntity deleteStudent(@RequestBody Student student){
-		System.out.println("student:"+student);
+		System.out.println("deleteStudent() - student:"+student);
 		for(int i=0;i<list.size();i++){
 			Student ss = list.get(i);
 			if(ss.getId().equals(student.getId())){
@@ -62,11 +62,11 @@ public class MyAppController {
 		return new ResponseEntity(HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/student/addStudent", method=RequestMethod.POST)
-	public ResponseEntity<Void> addStudent(Student student){
-		System.out.println("student:"+student);
+	@RequestMapping(value="/student/addStudent", consumes = MediaType.APPLICATION_JSON_VALUE, method=RequestMethod.POST)
+	public List<Student> addStudent(@RequestBody Student student){
+		System.out.println("addStudent() - student:"+student);
 		list.add(student);
-		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		return list;
 	}
 	
 	@RequestMapping(value ="/student/updateStudent", consumes=MediaType.APPLICATION_JSON_VALUE, method=RequestMethod.POST)
