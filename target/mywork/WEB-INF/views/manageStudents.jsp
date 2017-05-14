@@ -7,15 +7,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 
 <script>
-$(document).ready(function(){
-		$("#editstud").click(function(){
-			$("#studid").prop('disabled',true);	
-		});
-		
-});
-</script>
-
-<script>
 	var app = angular.module('MyApp',[]);
 	var REST_URL = 'http://localhost:7001/mywork/';
 	
@@ -58,7 +49,7 @@ $(document).ready(function(){
 				headers : {
 					'Content-Type' : 'application/json'
 				}
-			}).then(getStudentDetails());
+			}).then(getStudentDetails(), clearForm());
 		}
 		
 		$scope.updateStudent = function(){
@@ -72,6 +63,18 @@ $(document).ready(function(){
 				}
 			}).then(getStudentDetails(), clearForm());
 				
+		}
+		
+		$scope.addStudent = function(){
+			console.log("##addStudent()##");
+			$http({
+				method : 'POST',
+				url : REST_URL+'student/addStudent',
+				data : angular.toJson($scope.studentsForm),
+				headers : {
+					'Content-Type' : 'application/json'
+				}
+			}).then(getStudentDetails(), clearForm());
 		}
 		
 		function clearForm(){
@@ -110,6 +113,7 @@ $(document).ready(function(){
 			<tr>
 				<td colspan="4">
 				<button id="updins" class="btn btn-primary btn-sm" ng-click="updateStudent()">Update</button>
+				<button id="updins" class="btn btn-primary btn-sm" ng-click="addStudent()">Add</button>
 				</td>
 			</tr>
 			
