@@ -21,5 +21,10 @@ public class QuestionsController {
 	public List<IQQuestions> getAllQuestions(){
 		return questionsService.findAllQuestions();
 	}
+	
+	@RequestMapping(value="/getRandomQuestions", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+	public List<IQQuestions> getRandomQuestions(){
+		return questionsService.getRandomQuestions(10);
+	}
 
 }

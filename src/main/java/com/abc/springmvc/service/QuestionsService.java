@@ -9,6 +9,8 @@ public interface QuestionsService {
 	IQQuestions findQuestionById(String questionId);
 
 	List<IQQuestions> findAllQuestions();
+	
+	List<IQQuestions> getRandomQuestions(int count);
 
 	void addQuestion(IQQuestions iqQuestions);
 

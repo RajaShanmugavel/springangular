@@ -1,9 +1,12 @@
 package com.abc.springmvc.model;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -16,7 +19,8 @@ public class IQAnswers {
 	private String aId;
 	
 	@ManyToOne
-	@JoinColumn(name="qid")
+	@Basic(fetch=FetchType.LAZY)
+	@Lob @JoinColumn(name="qid")
 	private IQQuestions iqQuestions;
 	
 	@ManyToOne
