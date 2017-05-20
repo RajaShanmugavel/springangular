@@ -2,6 +2,7 @@ package com.abc.springmvc.service;
 
 import java.util.List;
 
+import com.abc.springmvc.bean.QuestionsAndOptions;
 import com.abc.springmvc.model.IQQuestions;
 
 public interface QuestionsService {
@@ -17,5 +18,7 @@ public interface QuestionsService {
 	void deleteQuestion(String questionId);
 
 	void updateQuestion(IQQuestions iqQuestions);
+	
+	public List<QuestionsAndOptions> getQuestionsAndOptions();
 
 }

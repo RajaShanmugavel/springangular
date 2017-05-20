@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.abc.springmvc.bean.QuestionsAndOptions;
 import com.abc.springmvc.model.IQQuestions;
 import com.abc.springmvc.service.QuestionsService;
 
@@ -26,5 +27,11 @@ public class QuestionsController {
 	public List<IQQuestions> getRandomQuestions(){
 		return questionsService.getRandomQuestions(10);
 	}
+	
+	@RequestMapping(value="/getRandomQuestionsAndAnswers", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+	public List<QuestionsAndOptions> getRandomQuestionsAndAnswers(){
+		return questionsService.getQuestionsAndOptions();
+	}
+	
 
 }

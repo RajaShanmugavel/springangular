@@ -10,7 +10,11 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.abc.springmvc.bean.Options;
+import com.abc.springmvc.bean.QuestionsAndOptions;
+import com.abc.springmvc.dao.OptionsDao;
 import com.abc.springmvc.dao.QuestionsDao;
+import com.abc.springmvc.model.IQOptions;
 import com.abc.springmvc.model.IQQuestions;
 
 @Service
@@ -22,6 +26,9 @@ public class QuestionsServiceImpl implements QuestionsService {
 	
 	@Autowired
 	private QuestionsDao questionsDao;
+	
+	@Autowired
+	private OptionsDao optionsDao;
 
 	@Override
 	public IQQuestions findQuestionById(String questionId) {
@@ -61,6 +68,29 @@ public class QuestionsServiceImpl implements QuestionsService {
 			randomQuestionsList.add(allQuestionsList.get(list.get(i)));
 		}
 		return randomQuestionsList;
+	}
+	
+	@Override
+	public List<QuestionsAndOptions> getQuestionsAndOptions(){
+		List<IQQuestions> list = getRandomQuestions(10);
+		List<QuestionsAndOptions> fullList = new ArrayList<QuestionsAndOptions>();
+		
+		for(IQQuestions iq:list){
+			List<IQOptions> opList = optionsDao.findOptionsByQuestionId(iq.getqId());
+			QuestionsAndOptions quesOptions = new QuestionsAndOptions();
+			quesOptions.setQuestionId(iq.getqId());
+			quesOptions.setQuestionText(iq.getqTxt());
+			List<Options> subList = new ArrayList<Options>();
+			for(IQOptions op:opList){
+				Options options = new Options();
+				options.setOptionId(op.getoId());
+				options.setOptionText(op.getoText());
+				subList.add(options);
+			}
+			quesOptions.setOptions(subList);
+		   fullList.add(quesOptions);
+		}
+		return fullList;
 	}
 	
 	private void removeDuplicates(){
