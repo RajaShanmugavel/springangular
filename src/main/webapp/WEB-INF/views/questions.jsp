@@ -34,6 +34,19 @@
 				console.error(errResponse);
 			});
 		}
+		
+		$scope.submitQuestions = function(options){
+			console.log("##submitQuestions()##");
+			$http({
+				method : 'POST',
+				url : REST_URL + 'submitQuestions',
+				data : $scope.options
+				/* data : angular.toJson($scope.options), */
+				/* headers : {
+					'Content-Type' : 'application/json'
+				} */
+			});
+		}
 
 	});
 </script>
@@ -54,9 +67,12 @@
 						{{op.optionText}}
 					</td>
 				</tr>
-
+				<tr>
+				<td colspan="3"><button id="submitAns" class="btn btn-primary btn-sm" ng-click="submitQuestions(options)">Submit</button></td>
+				</tr>
 			</table>
 		</div>
+		
 	</form>
 
 </body>

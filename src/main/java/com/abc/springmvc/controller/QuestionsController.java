@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.abc.springmvc.bean.Options;
 import com.abc.springmvc.bean.QuestionsAndOptions;
 import com.abc.springmvc.model.IQQuestions;
 import com.abc.springmvc.service.QuestionsService;
@@ -33,5 +35,9 @@ public class QuestionsController {
 		return questionsService.getQuestionsAndOptions();
 	}
 	
+	@RequestMapping(value="/submitQuestions", method=RequestMethod.POST)
+	public void submitQuestions(@RequestBody Options qo){
+		System.out.println("qId:"+qo.getOptionId());
+	}
 
 }
