@@ -25,6 +25,7 @@ public class TestDefaultController {
 	
 	@Autowired
 	private WebApplicationContext wac;
+	
 	private MockMvc mockMvc;
 	
 	@Before

@@ -17,8 +17,7 @@
 
 		$scope.iqquestions = [];
 		$scope.iqquestionsForm = {
-			qId : "",
-			qTxt : ""
+				optionId : ""
 		};
 
 		loadQuestions();
@@ -35,12 +34,13 @@
 			});
 		}
 		
-		$scope.submitQuestions = function(options){
+		$scope.submitQuestions = function(){
 			console.log("##submitQuestions()##");
+			console.log($scope.iqquestionsForm.optionId);
 			$http({
 				method : 'POST',
 				url : REST_URL + 'submitQuestions',
-				data : $scope.options
+				data : $scope.question
 				/* data : angular.toJson($scope.options), */
 				/* headers : {
 					'Content-Type' : 'application/json'
@@ -50,6 +50,8 @@
 
 	});
 </script>
+
+
 
 </head>
 
@@ -63,17 +65,19 @@
 					<td><input type="hidden" value="question.questionId" />*</td>
 					<td>{{question.questionText}}</td>
 					<td ng-repeat="op in question.options">
-						<input type="hidden" value="op.optionId" /> <input type="checkbox" value="op.optionText" />
+						<input type="hidden" value="op.optionId" /> <input type="checkbox" ng-model="iqquestionsForm.optionId" ng-true-value="'{{op.optionText}}'" ng-false-value="'no'" />
 						{{op.optionText}}
 					</td>
 				</tr>
 				<tr>
-				<td colspan="3"><button id="submitAns" class="btn btn-primary btn-sm" ng-click="submitQuestions(options)">Submit</button></td>
+				<td colspan="3"><button id="submitAns" class="btn btn-primary btn-sm" ng-click="submitQuestions()">Submit</button></td>
 				</tr>
 			</table>
 		</div>
 		
 	</form>
+	
+
 
 </body>
 
