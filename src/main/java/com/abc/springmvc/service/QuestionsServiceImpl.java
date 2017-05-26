@@ -12,8 +12,11 @@ import org.springframework.stereotype.Service;
 
 import com.abc.springmvc.bean.Options;
 import com.abc.springmvc.bean.QuestionsAndOptions;
+import com.abc.springmvc.bean.QuestionsandOptionsSelected;
+import com.abc.springmvc.dao.AnswersDao;
 import com.abc.springmvc.dao.OptionsDao;
 import com.abc.springmvc.dao.QuestionsDao;
+import com.abc.springmvc.model.IQAnswers;
 import com.abc.springmvc.model.IQOptions;
 import com.abc.springmvc.model.IQQuestions;
 
@@ -29,6 +32,9 @@ public class QuestionsServiceImpl implements QuestionsService {
 	
 	@Autowired
 	private OptionsDao optionsDao;
+	
+	@Autowired
+	private AnswersDao answersDao;
 
 	@Override
 	public IQQuestions findQuestionById(String questionId) {
@@ -68,6 +74,20 @@ public class QuestionsServiceImpl implements QuestionsService {
 			randomQuestionsList.add(allQuestionsList.get(list.get(i)));
 		}
 		return randomQuestionsList;
+	}
+	
+	@Override
+	public void checkAnswersForQuestions(QuestionsandOptionsSelected[] qaoCollection) {
+		int counter = 0;
+		System.out.println("qaoCollection.length::"+qaoCollection.length);
+		for(QuestionsandOptionsSelected qao:qaoCollection){
+			System.out.println("Counter:"+counter);
+			System.out.println("qao.getQuestionText()::"+qao.getQuestionText());
+			List<IQAnswers> answersList = answersDao.findAnswersByQuestionId(qao.getQuestionId());
+			counter++;
+		}
+		
+		
 	}
 	
 	@Override
@@ -115,5 +135,7 @@ public class QuestionsServiceImpl implements QuestionsService {
 			return;
 		}
 	}
+
+
 
 }

@@ -90,6 +90,26 @@ insert into IQ_OPTIONS values ('OP00057','Q1015','Ovum');
 insert into IQ_OPTIONS values ('OP00058','Q1015','Nerve cell');
 insert into IQ_OPTIONS values ('OP00059','Q1015','Sperm');
 insert into IQ_OPTIONS values ('OP00060','Q1015','Liver cell');
+insert into IQ_OPTIONS values ('OP00061','Q1016','Emu');
+insert into IQ_OPTIONS values ('OP00062','Q1016','Kiwi');
+insert into IQ_OPTIONS values ('OP00063','Q1016','Ostrich');
+insert into IQ_OPTIONS values ('OP00064','Q1016','Bee humingbird');
+insert into IQ_OPTIONS values ('OP00065','Q1017','Capillary');
+insert into IQ_OPTIONS values ('OP00066','Q1017','Vein');
+insert into IQ_OPTIONS values ('OP00067','Q1017','Artery');
+insert into IQ_OPTIONS values ('OP00068','Q1017','Aorta');
+insert into IQ_OPTIONS values ('OP00069','Q1018','HN03');
+insert into IQ_OPTIONS values ('OP00070','Q1018','H2SO4');
+insert into IQ_OPTIONS values ('OP00071','Q1018','MNS04');
+insert into IQ_OPTIONS values ('OP00072','Q1018','HCL');
+insert into IQ_OPTIONS values ('OP00073','Q1019','Oxidisation');
+insert into IQ_OPTIONS values ('OP00074','Q1019','Chemical');
+insert into IQ_OPTIONS values ('OP00075','Q1019','Chain');
+insert into IQ_OPTIONS values ('OP00076','Q1019','Reduction');
+insert into IQ_OPTIONS values ('OP00077','Q1020','Auckland');
+insert into IQ_OPTIONS values ('OP00078','Q1020','Wellington');
+insert into IQ_OPTIONS values ('OP00079','Q1020','Queenstown');
+insert into IQ_OPTIONS values ('OP00080','Q1020','Christchurch');
 
 
 insert into IQ_ANSWERS values ('ANS0001','Q1001','OP00004');
@@ -109,8 +129,13 @@ insert into IQ_ANSWERS values ('ANS0014','Q1012','OP00045');
 insert into IQ_ANSWERS values ('ANS0015','Q1013','OP00050');
 insert into IQ_ANSWERS values ('ANS0016','Q1014','OP00054');
 insert into IQ_ANSWERS values ('ANS0017','Q1015','OP00057');
+insert into IQ_ANSWERS values ('ANS0018','Q1016','OP00062');
+insert into IQ_ANSWERS values ('ANS0019','Q1017','OP00068');
+insert into IQ_ANSWERS values ('ANS0020','Q1018','OP00070');
+insert into IQ_ANSWERS values ('ANS0021','Q1019','OP00073');
+insert into IQ_ANSWERS values ('ANS0022','Q1020','OP00078');
 
-
+commit;
 
 
 

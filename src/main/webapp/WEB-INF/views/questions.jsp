@@ -13,13 +13,10 @@
 	var app = angular.module('questionsApp', []);
 	var REST_URL = 'http://localhost:7001/mywork/';
 
-	app.controller('questionsController', function($scope, $http) {
+	app.controller('questionsController', function($scope, $http, $filter) {
 
-		$scope.iqquestions = [];
-		$scope.iqquestionsForm = {
-				optionId : ""
-		};
-
+		$scope.selectedList = [];
+		
 		loadQuestions();
 
 		function loadQuestions() {
@@ -34,18 +31,49 @@
 			});
 		}
 		
+		$scope.selectedOptions = function(){
+			console.log("##selectedOptions...##");
+			/* $scope.optionsArray = [];
+			angular.forEach($scope.iqquestions, function(question){
+				console.log("ques:"+question.questionId);
+				angular.forEach(question.options, function(option){
+					console.log("ops:"+option.optionId);
+					console.log("sel:"+option.checked);
+					console.log("selid:"+$scope.selectedOptionId);
+				});
+			}); */
+			//console.log("iqquestions.options:"+$scope.iqquestions[0].options[0].optionId);
+			//$scope.selectedList = $filter('filter')($scope.iqquestions, {selectedOptionId:true});
+			$scope.selectedList = $filter('filter')($scope.iqquestions, function(opt){
+				return opt;				
+			});
+		}
+		
 		$scope.submitQuestions = function(){
 			console.log("##submitQuestions()##");
-			console.log($scope.iqquestionsForm.optionId);
+			//console.log("##selectedList##"+$scope.selectedList); 
 			$http({
 				method : 'POST',
 				url : REST_URL + 'submitQuestions',
-				data : $scope.question
-				/* data : angular.toJson($scope.options), */
-				/* headers : {
+				data : angular.toJson($scope.selectedList),
+				headers : {
 					'Content-Type' : 'application/json'
-				} */
+				}
 			});
+		}
+		
+		
+		$scope.toggleSelection = function(fruitName){
+			console.log("##toggleSelection()##");
+			var idx = $scope.selection.indexOf(fruitName);
+			console.log("idx:"+idx);
+			console.log("sel:"+$scope.selection);
+			
+			if(idx > -1){
+				$scope.selection.splice(idx,1);
+			}else{
+				$scope.selection.push(fruitName);
+			}
 		}
 
 	});
@@ -62,22 +90,20 @@
 			<table class="table table-bordered" style="width: 600px">
 
 				<tr ng-repeat="question in iqquestions">
-					<td><input type="hidden" value="question.questionId" />*</td>
-					<td>{{question.questionText}}</td>
-					<td ng-repeat="op in question.options">
-						<input type="hidden" value="op.optionId" /> <input type="checkbox" ng-model="iqquestionsForm.optionId" ng-true-value="'{{op.optionText}}'" ng-false-value="'no'" />
-						{{op.optionText}}
-					</td>
+				<td>{{question.questionText}}</td>
+				<td ng-repeat="op in question.options">
+					<input type="checkbox" name="{{op.optionId}}" id={{op.optionId}} ng-model="op.selectedOptionId" ng-change="selectedOptions()">
+					{{op.optionText}}
+				</td>	
 				</tr>
 				<tr>
 				<td colspan="3"><button id="submitAns" class="btn btn-primary btn-sm" ng-click="submitQuestions()">Submit</button></td>
 				</tr>
 			</table>
+			<!-- Selected List  {{selectedList}} -->
 		</div>
 		
 	</form>
-	
-
 
 </body>
 
