@@ -8,6 +8,8 @@ create table IQ_OPTIONS(oid varchar(10), qid varchar(10), otext varchar(250), PR
 
 create table IQ_ANSWERS(aid varchar(10), qid varchar(10), oid varchar(10), PRIMARY KEY(aid), FOREIGN KEY(qid) REFERENCES IQ_QUESTIONS(qid), FOREIGN KEY(oid) REFERENCES IQ_OPTIONS(oid));
 
+create table IQ_SUBMITTED_QA(subid integer(10), qid varchar(10), qtxt varchar(200), selopid varchar(10), seloptxt varchar(250),corropid varchar(10), corroptxt varchar(250), userid varchar(100), saveddate date, PRIMARY KEY(subid); 
+
 insert into IQ_QUESTIONS values ('Q1001','What is the capital of Italy?'); -- Rome
 insert into IQ_QUESTIONS values ('Q1002','Who holds the record for winning most number of Grand Slam single titles in tennis?'); -- Serena Williams
 insert into IQ_QUESTIONS values ('Q1003','Who is known as the father of Computers?'); -- Charles Babbage

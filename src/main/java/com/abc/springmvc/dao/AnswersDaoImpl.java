@@ -24,10 +24,11 @@ public class AnswersDaoImpl implements AnswersDao {
 		
 		for(Object[] obArr:list){
 				IQAnswers an = (IQAnswers)obArr[0];
-				System.out.println("an.getaId()::"+an.getaId());
-				System.out.println("an.getQId()::"+an.getIqQuestions().getqId());
-				System.out.println("an.getOId()::"+an.getIqOptions().getoId());
-				System.out.println("an.getOText()::"+an.getIqOptions().getoText());
+//				System.out.println("an.getaId()::"+an.getaId());
+//				System.out.println("an.getQId()::"+an.getIqQuestions().getqId());
+//				System.out.println("an.getOId()::"+an.getIqOptions().getoId());
+//				System.out.println("an.getOText()::"+an.getIqOptions().getoText());
+				answersList.add(an);
 		}
 		
 		return answersList;

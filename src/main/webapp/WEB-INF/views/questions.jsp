@@ -16,6 +16,7 @@
 	app.controller('questionsController', function($scope, $http, $filter) {
 
 		$scope.selectedList = [];
+		$scope.displayResults = [];
 		
 		loadQuestions();
 
@@ -27,6 +28,18 @@
 			}).then(function successCallback(response) {
 				$scope.iqquestions = response.data;
 			}, function errorCallback(errResponse) {
+				console.error(errResponse);
+			});
+		}
+		
+		function getResultString(){
+			console.log("##getResultString()##");
+			$http({
+				method : 'GET',
+				url : REST_URL + 'getResultString'
+			}).then(function successCallback(response){
+				$scope.displayResults = response.data;
+			}, function errorCallback(errResponse){
 				console.error(errResponse);
 			});
 		}
@@ -59,7 +72,7 @@
 				headers : {
 					'Content-Type' : 'application/json'
 				}
-			});
+			}).then(getResultString());
 		}
 		
 		
@@ -100,10 +113,38 @@
 				<td colspan="3"><button id="submitAns" class="btn btn-primary btn-sm" ng-click="submitQuestions()">Submit</button></td>
 				</tr>
 			</table>
-			<!-- Selected List  {{selectedList}} -->
+		</div>
+		
+		<div>
+		<table>
+		<tr ng-repeat="disp in displayResults">
+		<td><b><font color="brown">{{disp.question}}</font></b>
+		
+			<label ng-repeat="selOp in disp.selectedOption">
+			Your selected option:
+			<font color="darkgrey">
+			{{selOp.name}}
+			</font>
+			</label>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<label ng-repeat="corrOp in disp.correctOption">
+			Correct option:
+			<font color="darkgreen">
+			{{corrOp.name}}
+			</font>
+			</label>
+		
+			<!-- <div ng-if="disp.correctOption"><font color='darkgreen'><b>{{disp.correctOption}}</b></font></div> -->
+		</td>
+		</tr>
+		</table>
 		</div>
 		
 	</form>
+	
+	<div>
+	
+	</div>
 
 </body>
 

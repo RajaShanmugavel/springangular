@@ -2,6 +2,7 @@ package com.abc.springmvc.service;
 
 import java.util.List;
 
+import com.abc.springmvc.bean.DisplayQABean;
 import com.abc.springmvc.bean.QuestionsAndOptions;
 import com.abc.springmvc.bean.QuestionsandOptionsSelected;
 import com.abc.springmvc.model.IQQuestions;
@@ -22,6 +23,6 @@ public interface QuestionsService {
 	
 	List<QuestionsAndOptions> getQuestionsAndOptions();
 	
-	void checkAnswersForQuestions(QuestionsandOptionsSelected[] qaoCollection);
+	List<DisplayQABean> checkAnswersForQuestions(QuestionsandOptionsSelected[] qaoCollection);
 
 }

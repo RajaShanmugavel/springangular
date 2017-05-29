@@ -1,14 +1,17 @@
 package com.abc.springmvc.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.abc.springmvc.bean.DisplayQABean;
 import com.abc.springmvc.bean.QuestionsAndOptions;
 import com.abc.springmvc.bean.QuestionsandOptionsSelected;
 import com.abc.springmvc.model.IQQuestions;
@@ -19,6 +22,8 @@ public class QuestionsController {
 
 	@Autowired
 	private QuestionsService questionsService;
+	
+	private static List<DisplayQABean> res = new ArrayList<DisplayQABean>();
 	
 	
 	@RequestMapping(value="/getAllQuestions", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
@@ -38,33 +43,20 @@ public class QuestionsController {
 	
 	@RequestMapping(value="/submitQuestions", method=RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
 	public void submitQuestions(@RequestBody QuestionsandOptionsSelected[] qaoList){
-		
-		System.out.println("QuestionsandOptionsSelected::"+qaoList);
-		if(qaoList != null)
-			System.out.println("qaoList.length::"+qaoList.length);
-		
-		questionsService.checkAnswersForQuestions(qaoList);
-		
+		res = questionsService.checkAnswersForQuestions(qaoList);
+		System.out.println("::::res.size::::"+res.size());
 	}
 	
-	/*
-	 * Miscellaneous method
-	 */
-	private void displayAllQandP(QuestionsandOptionsSelected[] qaoList){
-		for(QuestionsandOptionsSelected qao:qaoList){
-			System.out.print("--");
-			System.out.println(qao.getQuestionId());
-			System.out.println(qao.getQuestionText());
-			qao.getOptions().forEach(o->{
-				System.out.print(o.getOptionId());
-				System.out.print(" ");
-				System.out.print(o.getOptionText());
-				System.out.print(" ");
-				System.out.println(o.isSelectedOptionId());
-				System.out.print(" ");
-			});
-		}
-
+	@RequestMapping(value="/getResultString", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+	public List<DisplayQABean> getResultString(){
+		return res;
 	}
+	
+	@RequestMapping(value="/testMethod", method=RequestMethod.GET)
+	public String testMethod(String str, ModelMap model){
+		model.addAttribute("testAttr","Appended.."+str);
+		return "sample";
+	}
+
 
 }

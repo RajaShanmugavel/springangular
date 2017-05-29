@@ -1,5 +1,7 @@
+com\abc\springmvc\model\IQSubmittedQA.class
 com\abc\springmvc\configuration\SecurityWebApplicationInitializer.class
 com\abc\springmvc\service\QuestionsServiceImpl.class
+com\abc\springmvc\bean\NameBean.class
 com\abc\springmvc\configuration\MyAppInitializer.class
 com\abc\springmvc\controller\MyAppController.class
 com\abc\springmvc\model\IQQuestions.class
@@ -8,6 +10,7 @@ com\abc\springmvc\controller\DefaultController.class
 com\abc\springmvc\bean\Options.class
 com\abc\springmvc\model\Student.class
 com\abc\springmvc\configuration\MyAppConfiguration.class
+com\abc\springmvc\dao\SubmittedDao.class
 com\abc\springmvc\bean\QuestionsandOptionsSelected.class
 com\abc\springmvc\dao\QuestionsDaoImpl.class
 com\abc\springmvc\model\IQOptions.class
@@ -22,5 +25,7 @@ com\abc\springmvc\dao\QuestionsDao.class
 com\abc\springmvc\model\IQAnswers.class
 com\abc\springmvc\configuration\HibernateConfiguration.class
 com\abc\springmvc\configuration\SecurityConfiguration.class
+com\abc\springmvc\bean\DisplayQABean.class
 com\abc\springmvc\dao\OptionsDaoImpl.class
 com\abc\springmvc\dao\AnswersDao.class
+com\abc\springmvc\dao\SubmittedDaoImpl.class

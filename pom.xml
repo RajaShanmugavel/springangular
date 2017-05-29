@@ -211,6 +211,10 @@
 			<version>3.2.3.RELEASE</version>
 			<scope>test</scope>
 		</dependency>
+		
+		
+			
+		
 
 	</dependencies>
 
@@ -235,6 +239,66 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>com.oracle.weblogic</groupId>
+				<artifactId>wls-maven-plugin</artifactId>
+				<version>12.2.1-2-0</version>
+				<configuration>
+					<middlewareHome>E:\weblogic\wls12212</middlewareHome>
+				</configuration>
+				<executions>
+					<!-- Execute the appc goal during the package phase -->
+					<execution>
+						<id>wls-appc</id>
+						<phase>package</phase>
+						<goals>
+							<goal>appc</goal>
+						</goals>
+						<configuration>
+							<source>${project.build.directory}/${project.name}.${project.packaging}</source>
+						</configuration>
+					</execution>
+					<!-- Deploy the application to the WebLogic Server in the pre-integration-test 
+						phase -->
+					<execution>
+						<id>wls-deploy</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+						<configuration>
+							<!--The admin URL where the app is deployed. Here use the plugin's default 
+								value t3://localhost:7001 -->
+							<adminurl>t3://127.0.0.1:7001</adminurl>
+							<user>weblogic</user>
+							<password>weblogic</password>
+							<!--The location of the file or directory to be deployed -->
+							<source>${project.build.directory}/${project.build.finalName}.${project.packaging}</source>
+							<!--The target servers where the application is deployed. Here use the 
+								plugin's default value AdminServer -->
+							<targets>AdminServer</targets>
+							<verbose>true</verbose>
+							<name>${project.build.finalName}</name>
+						</configuration>
+					</execution>
+					<!-- Stop the application in the pre-integration-test phase -->
+					<execution>
+						<id>wls-stop-app</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>stop-app</goal>
+						</goals>
+						<configuration>
+							<adminurl>t3://127.0.0.1:7001</adminurl>
+							<user>weblogic</user>
+							<password>weblogic</password>
+							<name>${project.build.finalName}</name>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			
 			</plugins>
 		</pluginManagement>
 		<finalName>mywork</finalName>
