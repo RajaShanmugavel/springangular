@@ -44,6 +44,19 @@
 			});
 		}
 		
+		/*
+			The same above $http calling REST can be done also like:
+				
+				$http.get("/resturl")
+					.success(function (result){
+						$scope.something = result;
+					})
+					.error(function (error){
+						console.log(error);
+					});
+		
+		*/
+		
 		$scope.selectedOptions = function(){
 			console.log("##selectedOptions...##");
 			/* $scope.optionsArray = [];
