@@ -47,13 +47,26 @@
 		/*
 			The same above $http calling REST can be done also like:
 				
+				a GET:
+				
 				$http.get("/resturl")
 					.success(function (result){
 						$scope.something = result;
 					})
-					.error(function (error){
-						console.log(error);
+					.error(function (err){
+						console.log(err);
 					});
+		
+				a POST:
+					
+				$http.post("/resturl", {name: $scope.userName})
+				    .success(function (result){
+						$scope.something = result;
+					})
+					.error(function (err){
+						console.log(err);
+					});
+				
 		
 		*/
 		
