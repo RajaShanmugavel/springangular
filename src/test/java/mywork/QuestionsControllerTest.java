@@ -10,6 +10,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -52,6 +53,7 @@ public class QuestionsControllerTest {
 		mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 	}
 
+	@Ignore
 	@Test
 	public void shouldGetAllQuestions() throws Exception {
 		List<IQQuestions> iqList = new ArrayList<>();
